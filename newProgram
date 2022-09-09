@@ -1,0 +1,81 @@
+#!/usr/bin/python
+
+
+#################################################################################################################################################################################
+# This program is part of Udemy "The Complete Python Course | Learn Python by Doing in 2022"                                                                                    #
+# The main objective of this program is to create a list of movies entered by the user and give options to add a movie, see the current selection,                              #
+# or find a movie based on the title                                                                                                                                            #
+#################################################################################################################################################################################
+
+
+from doctest import BLANKLINE_MARKER
+from hashlib import new
+from itertools import count
+from tokenize import blank_re
+
+
+movies = []
+
+# Asking user to input movie title, director, release year and then adding it to movies list
+
+def add_movie():
+
+    m_name = input("\nPlease enter the name of the movie: ")
+    m_director = input("\nPlease enter the director of the movie: ")
+    m_year = input("\nPlease enter the release year of the movie: \n")
+
+    movies.append({
+        'title':m_name,
+        'director':m_director,
+        'year':m_year
+    })
+
+    return movies
+
+# Iterating through the movies list and printing the result
+
+def print_movies(movies):
+    for movie in movies:
+        print(f"\nMovie name: {movie['title']} \nDirector name: {movie['director']} \nRelease year: {movie['year']}\n")
+
+# Printing the user menu
+
+def print_menu():
+    menuSelection = input("\nEnter 'a' to enter a movie, 'l' to see your movies, 'f' to find a movie by title, or 'q' to quit: ")
+    return menuSelection
+
+def movie_search(movies):
+
+    searchTitle = input("Please enter a title to search for: ")
+    for movie in movies:
+        if movie['title'] == searchTitle:
+            print(f"\nMovie name: {movie['title']} \nDirector name: {movie['director']} \nRelease year: {movie['year']}\n")
+            break
+    else:
+        print("\nSorry. Not found")
+
+# Calling main
+
+if __name__ == '__main__':
+
+    menuSelection = input("\nEnter 'a' to enter a movie, 'l' to see your movies, 'f' to find a movie by title, or 'q' to quit: ")
+
+    while menuSelection != 'q':
+
+        if menuSelection == 'a':
+
+            print("Entering add movie section")
+
+            add_movie()
+
+        elif menuSelection == 'l':
+
+            print_movies(movies)
+
+        elif menuSelection == 'f':
+            movie_search(movies)
+        
+        else:
+            print("Unknown command. Please try again.")
+        
+        menuSelection = input("\nEnter 'a' to enter a movie, 'l' to see your movies, 'f' to find a movie by title, or 'q' to quit: ")
